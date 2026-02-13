@@ -1,0 +1,19 @@
+services:
+  sftp:
+    image: atmoz/sftp:latest
+    ports:
+      - "2222:22"
+    command: candidate:test123:::upload
+    volumes:
+      - ./sftp/data/upload:/home/candidate/upload
+
+  wiremock:
+    image: wiremock/wiremock:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./wiremock/mappings:/home/wiremock/mappings
+      - ./wiremock/__files:/home/wiremock/__files
+    command:
+      - --verbose
+      - --global-response-templating

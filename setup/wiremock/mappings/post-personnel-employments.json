@@ -1,0 +1,55 @@
+{
+  "scenarioName": "employment-flaky",
+  "requiredScenarioState": "Started",
+  "newScenarioState": "second",
+  "priority": 1,
+  "request": {
+    "method": "POST",
+    "url": "/personnel/employments",
+    "headers": {
+      "Content-Type": {
+        "contains": "application/json"
+      },
+      "Authorization": {
+        "contains": "Bearer"
+      }
+    },
+    "bodyPatterns": [
+      { "matchesJsonPath": "$.user.firstName" },
+      { "matchesJsonPath": "$.user.lastName" },
+      { "matchesJsonPath": "$.user.dateOfBirth" },
+      { "matchesJsonPath": "$.user.gender" },
+      { "matchesJsonPath": "$.user.emailWork" },
+      { "matchesJsonPath": "$.user.emailPrivate" },
+      { "matchesJsonPath": "$.user.activeDirectoryLogin" },
+      { "matchesJsonPath": "$.user.phoneNumberWork.phoneNumber" },
+      { "matchesJsonPath": "$.user.phoneNumberWork.dialCode" },
+      { "matchesJsonPath": "$.user.phoneNumberWork.countryCode" },
+      { "matchesJsonPath": "$.user.addressInfo[0].postAddress.address" },
+      { "matchesJsonPath": "$.user.addressInfo[0].postAddress.zipCode" },
+      { "matchesJsonPath": "$.user.addressInfo[0].postAddress.city" },
+      { "matchesJsonPath": "$.user.addressInfo[0].postAddress.country" },
+      { "matchesJsonPath": "$[?(@.personalIdentification.idNumber =~ /.+/)]" },
+      { "matchesJsonPath": "$.personalIdentification.idType" },
+      { "matchesJsonPath": "$.personalIdentification.idCountry" },
+      { "matchesJsonPath": "$.employment.number" },
+      { "matchesJsonPath": "$.employment.startDate" },
+      { "matchesJsonPath": "$.employment.fteFactor" },
+      { "matchesJsonPath": "$.employment.jobId" },
+      { "matchesJsonPath": "$.employment.orgUnitId" },
+      { "matchesJsonPath": "$.employment.location" },
+      { "matchesJsonPath": "$.companyEmployee.employeeId" }
+    ]
+  },
+  "response": {
+    "status": 201,
+    "headers": {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*"
+    },
+    "jsonBody": {
+      "id": "{{randomValue type='UUID'}}"
+    },
+    "transformers": ["response-template"]
+  }
+}

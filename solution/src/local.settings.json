@@ -1,0 +1,15 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+    "SftpHost": "localhost",
+    "SftpPort": "2222",
+    "SftpUsername": "candidate",
+    "SftpPassword": "test123",
+    "SftpDirectory": "/upload",
+    "HrmApiBaseUrl": "http://localhost:8080",
+    "HrmClientId": "interview",
+    "HrmClientSecret": "secret"
+  }
+}

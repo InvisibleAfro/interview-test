@@ -1,0 +1,61 @@
+{
+  "priority": 2,
+  "request": {
+    "method": "POST",
+    "url": "/personnel/employments",
+    "headers": {
+      "Content-Type": {
+        "contains": "application/json"
+      },
+      "Authorization": {
+        "contains": "Bearer"
+      }
+    }
+  },
+  "response": {
+    "status": 400,
+    "headers": {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*"
+    },
+    "jsonBody": {
+      "code": 400,
+      "message": "Bad Request - one or more required fields are missing or could not be parsed",
+      "requiredFields": {
+        "user": [
+          "firstName",
+          "lastName",
+          "dateOfBirth",
+          "gender",
+          "emailWork",
+          "emailPrivate",
+          "activeDirectoryLogin",
+          "phoneNumberWork.phoneNumber",
+          "phoneNumberWork.dialCode",
+          "phoneNumberWork.countryCode",
+          "addressInfo[0].postAddress.address",
+          "addressInfo[0].postAddress.zipCode",
+          "addressInfo[0].postAddress.city",
+          "addressInfo[0].postAddress.country"
+        ],
+        "personalIdentification": [
+          "idNumber",
+          "idType",
+          "idCountry"
+        ],
+        "employment": [
+          "number",
+          "startDate",
+          "fteFactor",
+          "jobId",
+          "orgUnitId",
+          "location"
+        ],
+        "companyEmployee": [
+          "employeeId"
+        ]
+      },
+      "hint": "Compare your request body against the required fields above. The request matched authentication but failed field validation."
+    }
+  }
+}

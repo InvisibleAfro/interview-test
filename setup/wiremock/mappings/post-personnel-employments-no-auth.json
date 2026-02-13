@@ -1,0 +1,24 @@
+{
+  "priority": 3,
+  "request": {
+    "method": "POST",
+    "url": "/personnel/employments",
+    "headers": {
+      "Content-Type": {
+        "contains": "application/json"
+      }
+    }
+  },
+  "response": {
+    "status": 401,
+    "headers": {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*"
+    },
+    "jsonBody": {
+      "code": 401,
+      "message": "Unauthorized",
+      "errors": []
+    }
+  }
+}
