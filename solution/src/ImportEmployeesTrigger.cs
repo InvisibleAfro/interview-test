@@ -19,11 +19,12 @@ public class ImportEmployeesTrigger
 
     [Function("ImportEmployees")]
     public async Task<IActionResult> Run(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "import")] HttpRequest req)
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "import")] HttpRequest req,
+        CancellationToken ct)
     {
         _logger.LogInformation("Employee import triggered");
 
-        var result = await _importService.Import();
+        var result = await _importService.Import(ct);
 
         if (result.IsFailure)
         {
