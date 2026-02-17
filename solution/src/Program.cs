@@ -47,6 +47,12 @@ internal class Program
                     client.BaseAddress = new Uri(opts.BaseUrl);
                 });
 
+                services.AddHttpClient(HrmApiClient.Client, (sp, client) =>
+                {
+                    var opts = sp.GetRequiredService<IOptions<RestApiOptions>>().Value;
+                    client.BaseAddress = new Uri(opts.BaseUrl);
+                });
+
                 services.AddImportPipeline();
             })
             .Build();

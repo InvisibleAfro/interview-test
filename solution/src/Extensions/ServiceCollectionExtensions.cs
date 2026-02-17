@@ -15,6 +15,7 @@ namespace HrmFileImport.Extensions
             services.AddSingleton<ICountryCodeMapper, CountryCodeMapper>();
             services.AddSingleton<IDateFormatter, DateFormatter>();
             services.AddSingleton<IEmploymentRequestMapperMapper, EmploymentRequestMapper>();
+            services.AddTransient<IHrmApiClient, HrmApiClient>();
             services.AddTransient<FileImportService>();
 
             return services;

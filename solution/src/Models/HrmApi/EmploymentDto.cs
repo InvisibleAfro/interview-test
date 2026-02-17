@@ -8,7 +8,7 @@ namespace HrmFileImport.Models.HrmApi
         public string? Number { get; set; }
 
         /// <summary>
-        /// ISO 8601 (string per spec: )yyyy-MM-ddT00:00:00+0000)
+        /// ISO 8601 
         /// </summary>
         [JsonPropertyName("startDate")]
         public string? StartDate { get; set; }

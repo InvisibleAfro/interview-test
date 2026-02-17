@@ -47,18 +47,18 @@ namespace HrmFileImport.Mappers
                     },
 
                     AddressInfo = new List<AddressInfoDto>
-                {
-                    new AddressInfoDto
                     {
-                        PostAddress = new PostAddressDto
+                        new AddressInfoDto
                         {
-                            Address = TrimOrNull(row.StreetAddress),
-                            ZipCode = TrimOrNull(row.ZipCode),
-                            City = TrimOrNull(row.City),
-                            Country = countryAlpha3
+                            PostAddress = new PostAddressDto
+                            {
+                                Address = TrimOrNull(row.StreetAddress),
+                                ZipCode = TrimOrNull(row.ZipCode),
+                                City = TrimOrNull(row.City),
+                                Country = countryAlpha3
+                            }
                         }
                     }
-                }
                 },
 
                 PersonalIdentification = new PersonalIdentificationDto

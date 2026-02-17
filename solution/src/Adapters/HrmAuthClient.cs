@@ -7,7 +7,7 @@ namespace HrmFileImport.Adapters
 {
     public class HrmAuthClient : IHrmAuthClient
     {
-        public const string Client = "HrmApi";
+        public const string Client = "HrmAuth";
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly RestApiOptions _options;
 
