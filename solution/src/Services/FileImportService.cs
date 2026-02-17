@@ -5,6 +5,7 @@ using HrmFileImport.Models.Csv;
 using HrmFileImport.Ports;
 using Microsoft.Extensions.Logging;
 using System.Globalization;
+using System.Net;
 
 namespace HrmFileImport.Services;
 
@@ -53,9 +54,18 @@ public class FileImportService
                     await _hrmApi.PostEmployee(employmentRequest, token, ct);
                     importedRows++;
                 }
+                catch (HttpRequestException ex) when (ex.StatusCode == HttpStatusCode.Unauthorized)
+                {
+                    _logger.LogError(ex, "Unauthorized when calling HRM API. Aborting import.");
+                    return Result.Failure("Unauthorized calling HRM API");
+                }
+                catch (HttpRequestException ex)
+                {
+                    _logger.LogError(ex, "HTTP error importing employee with EmploymentID {Id}", employee.EmploymentID);
+                }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex, "Failed to import employee with EmploymentID {Id}", employee.EmploymentID);
+                    _logger.LogError(ex, "Unexpected error importing employee with EmploymentID {Id}", employee.EmploymentID);
                 }
             }
 
@@ -66,7 +76,7 @@ public class FileImportService
         }
         catch(Exception ex)
         {
-            _logger.LogError(ex, "Failed to import employee records");
+            _logger.LogError(ex, "Unexpteced error. Failed to import employee records");
             return Result.Failure(ex.Message);
         }
 

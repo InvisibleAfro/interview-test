@@ -36,7 +36,7 @@ namespace HrmFileImport.Adapters
             {
                 var body = await resp.Content.ReadAsStringAsync(ct);
                 throw new HttpRequestException(
-                    $"HRM API returned {(int)resp.StatusCode} {resp.ReasonPhrase}. Body: {body}");
+                    $"HRM API returned {(int)resp.StatusCode} {resp.ReasonPhrase}. Body: {body}", inner: null, statusCode: resp.StatusCode);
             }
         }
     }
