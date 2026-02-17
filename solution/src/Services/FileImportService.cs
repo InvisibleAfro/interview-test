@@ -45,12 +45,11 @@ public class FileImportService
             await foreach (var employee in employeeCsvReader.Csv.GetRecordsAsync<EmployeeCsvRow>(ct))
             {
                 totalRows++;
-                
-                _logger.LogInformation("Importing employee with EmploymentID {Id}", employee.EmploymentID);
-                var employmentRequest = _employmentRequestMapper.Map(employee);
-                
                 try
                 {
+                    _logger.LogInformation("Importing employee with EmploymentID {Id}", employee.EmploymentID);
+                    var employmentRequest = _employmentRequestMapper.Map(employee);
+                
                     await _hrmApi.PostEmployee(employmentRequest, token, ct);
                     importedRows++;
                 }
@@ -62,6 +61,9 @@ public class FileImportService
                 catch (HttpRequestException ex)
                 {
                     _logger.LogError(ex, "HTTP error importing employee with EmploymentID {Id}", employee.EmploymentID);
+                }catch(KeyNotFoundException ex)
+                {
+                    _logger.LogError(ex, "Mapping error for employee with EmploymentID {Id}.", employee.EmploymentID);
                 }
                 catch (Exception ex)
                 {
