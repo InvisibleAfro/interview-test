@@ -61,6 +61,8 @@ public class FileImportService
 
             if (totalRows != importedRows)
                 _logger.LogWarning("Not all rows could be imported. Expected {TotalRows}, imported {ImportedRows}", totalRows, importedRows);
+            else
+                _logger.LogInformation("Import finished without errors. Total rows imported {TotalRows}", totalRows);
         }
         catch(Exception ex)
         {
@@ -68,7 +70,6 @@ public class FileImportService
             return Result.Failure(ex.Message);
         }
 
-        _logger.LogInformation("Finished employee file import");
         return Result.Success();
     }
 
